@@ -35,7 +35,7 @@ namespace Api
 			});
 			services.AddDbContext<StoreContext>(ops =>
 			{
-				ops.UseSqlServer(_configuration.GetConnectionString("DefaultConnectionString"));
+				ops.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
 			});
 		}
 
