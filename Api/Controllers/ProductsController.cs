@@ -30,10 +30,27 @@ namespace Api.Controllers
 
 		[HttpGet]
 		[Route("{id}")]
-		public async Task<ActionResult<IEnumerable<Product>>> GetProduct(int id)
+		public async Task<ActionResult<IReadOnlyList<Product>>> GetProduct(int id)
 		{
 			var products = await _repository.GetProductByIdAsync(id);
 			return Ok(products);
 		}
+
+		[HttpGet]
+		[Route("brands")]
+		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+		{
+			var productBrands = await _repository.GetProductBrandsAsync();
+			return Ok(productBrands);
+		}
+
+		[HttpGet]
+		[Route("types")]
+		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductTypes()
+		{
+			var productTypes = await _repository.GetProductTypesAsync();
+			return Ok(productTypes);
+		}
+		
 	}
 }
