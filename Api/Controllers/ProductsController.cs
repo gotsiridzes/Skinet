@@ -1,5 +1,5 @@
-﻿using Api.Data;
-using Api.Entities;
+﻿using Infrastructure.Data;
+using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
@@ -19,7 +19,6 @@ namespace Api.Controllers
 		{
 			_context = context;
 		}
-
 
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
