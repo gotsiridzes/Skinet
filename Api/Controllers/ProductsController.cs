@@ -29,9 +29,9 @@ namespace Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+		public async Task<ActionResult<IEnumerable<Product>>> ListProducts()
 		{
-			var products = await _repository.GetProductsAsync();
+			var products = await _productsRepository.ListAllAsync();
 			return Ok(products);
 		}
 
@@ -39,25 +39,24 @@ namespace Api.Controllers
 		[Route("{id}")]
 		public async Task<ActionResult<IReadOnlyList<Product>>> GetProduct(int id)
 		{
-			var products = await _repository.GetProductByIdAsync(id);
+			var products = await _productsRepository.GetByIdAsync(id);
 			return Ok(products);
 		}
 
 		[HttpGet]
 		[Route("brands")]
-		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> ListProductBrands()
 		{
-			var productBrands = await _repository.GetProductBrandsAsync();
+			var productBrands = await _productsRepository.ListAllAsync();
 			return Ok(productBrands);
 		}
 
 		[HttpGet]
 		[Route("types")]
-		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductTypes()
+		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> ListProductTypes()
 		{
-			var productTypes = await _repository.GetProductTypesAsync();
+			var productTypes = await _typesRepository.ListAllAsync();
 			return Ok(productTypes);
 		}
-		
 	}
 }
