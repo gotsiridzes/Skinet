@@ -1,3 +1,4 @@
+using Api.Mappings;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace Api
 			});
 
 			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+			services.AddAutoMapper(typeof(MapProfile));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
