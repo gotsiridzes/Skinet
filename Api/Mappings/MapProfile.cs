@@ -14,7 +14,10 @@ namespace Api.Mappings
 					ops => ops.MapFrom(source => source.ProductBrand.Name))
 				.ForMember(
 					dest => dest.ProductType,
-					ops => ops.MapFrom(source => source.ProductType.Name));
+					ops => ops.MapFrom(source => source.ProductType.Name))
+				.ForMember(
+					dest => dest.PictureUrl,
+					ops => ops.MapFrom<ProductUrlResolver>());
 		}
 	}
 }
