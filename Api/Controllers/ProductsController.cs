@@ -57,7 +57,7 @@ namespace Api.Controllers
 		[Route("brands")]
 		public async Task<ActionResult<IReadOnlyList<ProductBrand>>> ListProductBrands()
 		{
-			var productBrands = await _productsRepository.ListAllAsync();
+			var productBrands = await _brandsRepository.ListAllAsync();
 			return Ok(productBrands);
 		}
 
