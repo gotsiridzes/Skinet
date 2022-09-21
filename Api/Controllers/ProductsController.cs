@@ -50,16 +50,7 @@ namespace Api.Controllers
 			var spec = new ProductsWithBrandsAndBrandsSpecification(id);
 			var product = await _productsRepository.GetEntityWithSpecification(spec);
 
-			return Ok(new ProductDto
-			{
-				Id = product.Id,
-				Description = product.Description,
-				Name = product.Name,
-				PictureUrl = product.PictureUrl,
-				Price = product.Price,
-				ProductBrand = product.ProductBrand.Name,
-				ProductType = product.ProductType.Name
-			});
+			return Ok(_mapper.Map<ProductDto>(product));
 		}
 
 		[HttpGet]
