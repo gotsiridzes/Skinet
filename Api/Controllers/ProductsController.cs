@@ -31,7 +31,7 @@ namespace Api.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<Product>>> ListProducts()
 		{
-			var products = await _productsRepository.ListAllAsync();
+			var products = await _productsRepository.ListAsync(new );
 			return Ok(products);
 		}
 
