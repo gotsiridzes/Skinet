@@ -42,7 +42,8 @@ namespace Api.Controllers
 		[Route("{id}")]
 		public async Task<ActionResult<IReadOnlyList<Product>>> GetProduct(int id)
 		{
-			var products = await _productsRepository.GetByIdAsync(id);
+			var spec = new ProductsWithBrandsAndBrandsSpecification(id);
+			var products = await _productsRepository.GetEntityWithSpecification(spec);
 			return Ok(products);
 		}
 
