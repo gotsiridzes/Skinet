@@ -10,6 +10,8 @@ using Core.Interfaces;
 using Core.Specifications;
 using Api.Dtos;
 using AutoMapper;
+using Api.Errors;
+using Microsoft.AspNetCore.Http;
 
 namespace Api.Controllers
 {
@@ -41,12 +43,18 @@ namespace Api.Controllers
 			return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
 		}
 
-		[HttpGet]
-		[Route("{id}")]
+		[HttpGet("{id}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<IReadOnlyList<ProductDto>>> GetProduct(int id)
 		{
 			var spec = new ProductsWithBrandsAndBrandsSpecification(id);
 			var product = await _productsRepository.GetEntityWithSpecification(spec);
+
+			if (product is null)
+			{
+				return NotFound(new ApiResponse(404));
+			}
 
 			return Ok(_mapper.Map<ProductDto>(product));
 		}
