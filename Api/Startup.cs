@@ -1,3 +1,4 @@
+using Api.Errors;
 using Api.Mappings;
 using Api.Middleware;
 using Core.Interfaces;
@@ -43,6 +44,19 @@ namespace Api
 
 			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 			services.AddAutoMapper(typeof(MapProfile));
+			services.Configure<ApiBehaviorOptions>(ops =>
+			{
+				ops.InvalidModelStateResponseFactory = actionContext =>
+				{
+					var errors = actionContext.ModelState.Where(er => er.Value.Errors.Count > 0).SelectMany(x => x.Value.Errors).Select(x => x.ErrorMessage).ToArray();
+					var errorsResponse = new ApiValidationErrorResponse
+					{
+						Errors = errors
+					};
+
+					return new BadRequestObjectResult(errorsResponse);
+				};
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
