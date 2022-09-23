@@ -35,10 +35,9 @@ namespace Api.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<ProductDto>>> ListProducts(string sort,
-			int? brandId, int? typeId)
+		public async Task<ActionResult<IEnumerable<ProductDto>>> ListProducts([FromQuery]ProductSpecificationParameters productParameters)
 		{
-			var spec = new ProductsWithBrandsAndBrandsSpecification(sort, brandId, typeId);
+			var spec = new ProductsWithBrandsAndBrandsSpecification(productParameters);
 
 			var products = await _productsRepository.ListAsync(spec);
 			return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));

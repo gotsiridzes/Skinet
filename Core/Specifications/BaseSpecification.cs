@@ -20,7 +20,7 @@ namespace Core.Specifications
 
 		public int Skip { get; private set; }
 
-		public bool IsPagingEnabled => throw new NotImplementedException();
+		public bool IsPagingEnabled { get; private set; }
 
 		public BaseSpecification()
 		{}
@@ -45,7 +45,7 @@ namespace Core.Specifications
 			OrderByDesc = orderByDescExpression;
 		}
 
-		protected void AppliPaging(int skip, int take)
+		protected void ApplyPaging(int skip, int take)
 		{
 			Skip = skip;
 			Take = take;
