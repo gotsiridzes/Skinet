@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace Core.Specifications
+﻿namespace Core.Specifications;
 
+public class ProductSpecificationParameters
 {
-	public class ProductSpecificationParameters
+	private const int MaxPageSize = 50;
+	public int PageIndex { get; set; } = 1;
+
+	private int _pageSize = 6;
+	private string _search;
+	public int PageSize
 	{
-		private const int MaxPageSize = 50;
-		public int PageIndex { get; set; } = 1;
+		get { return _pageSize; }
+		set { _pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
+	}
 
-		private int _pageSize = 6;
-		private string _search;
-		public int PageSize
-		{
-			get { return _pageSize; }
-			set { _pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
-		}
-
-		public int? BrandId { get; set; }
-		public int? TypeId { get; set; }
-		public string Sort { get; set; }
-		public string Search 
-		{ 
-			get => _search;
-			set => value.ToLower();
-		}
+	public int? BrandId { get; set; }
+	public int? TypeId { get; set; }
+	public string Sort { get; set; }
+	public string Search 
+	{ 
+		get => _search;
+		set => value.ToLower();
 	}
 }
