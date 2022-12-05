@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Api.Errors
+namespace Api.Errors;
+
+public class ApiValidationErrorResponse : ApiResponse
 {
-	public class ApiValidationErrorResponse : ApiResponse
-	{
-		public IEnumerable<string> Errors { get; set; }
+	public IEnumerable<string> Errors { get; set; }
 
-		public ApiValidationErrorResponse() : base(400)
-		{
-		}
+	public ApiValidationErrorResponse() : base(400)
+	{
 	}
 }

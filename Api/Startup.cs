@@ -3,60 +3,58 @@ using Api.Middleware;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Api
+namespace Api;
+
+public class Startup
 {
-	public class Startup
+	private readonly IConfiguration _configuration;
+
+	public Startup(IConfiguration configuration)
 	{
-		private readonly IConfiguration _configuration;
+		_configuration = configuration;
+	}
 
-		public Startup(IConfiguration configuration)
+	// This method gets called by the runtime. Use this method to add services to the container.
+	public void ConfigureServices(IServiceCollection services)
+	{
+		services.AddControllers();
+		services.AddDbContext<StoreContext>(ops =>
 		{
-			_configuration = configuration;
-		}
+			ops.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+		});
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
+		services.AddApplicationServices();
+		services.AddSwaggerDocumentation();
+		services.AddCors(ops =>
 		{
-			services.AddControllers();
-			services.AddDbContext<StoreContext>(ops =>
+			ops.AddPolicy("CorsPolicy", policy =>
 			{
-				ops.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+				policy
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.WithOrigins("https://localhost:4200");
 			});
+		});
+	}
 
-			services.AddApplicationServices();
-			services.AddSwaggerDocumentation();
-			services.AddCors(ops =>
-			{
-				ops.AddPolicy("CorsPolicy", policy =>
-				{
-					policy
-						.AllowAnyHeader()
-						.AllowAnyMethod()
-						.WithOrigins("https://localhost:4200");
-				});
-			});
-		}
+	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+	{
+		app.UseMiddleware<ExceptionMiddleware>();
+		app.UseSwaggerDocumentation(env);
+		app.UseStatusCodePagesWithReExecute("/errors/{0}");
+		app.UseHttpsRedirection();
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		app.UseRouting();
+		app.UseStaticFiles();
+		app.UseAuthorization();
+		app.UseCors("CorsPolicy");
+		app.UseEndpoints(endpoints =>
 		{
-			app.UseMiddleware<ExceptionMiddleware>();
-			app.UseSwaggerDocumentation(env);
-			app.UseStatusCodePagesWithReExecute("/errors/{0}");
-			app.UseHttpsRedirection();
-
-			app.UseRouting();
-			app.UseStaticFiles();
-			app.UseAuthorization();
-			app.UseCors("CorsPolicy");
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
-		}
+			endpoints.MapControllers();
+		});
 	}
 }

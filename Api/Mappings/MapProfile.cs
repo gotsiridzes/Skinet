@@ -2,22 +2,21 @@
 using AutoMapper;
 using Core.Entities;
 
-namespace Api.Mappings
+namespace Api.Mappings;
+
+public class MapProfile : Profile
 {
-	public class MapProfile : Profile
+	public MapProfile()
 	{
-		public MapProfile()
-		{
-			CreateMap<Product, ProductDto>()
-				.ForMember(
-					dest => dest.ProductBrand,
-					ops => ops.MapFrom(source => source.ProductBrand.Name))
-				.ForMember(
-					dest => dest.ProductType,
-					ops => ops.MapFrom(source => source.ProductType.Name))
-				.ForMember(
-					dest => dest.PictureUrl,
-					ops => ops.MapFrom<ProductUrlResolver>());
-		}
+		CreateMap<Product, ProductDto>()
+			.ForMember(
+				dest => dest.ProductBrand,
+				ops => ops.MapFrom(source => source.ProductBrand.Name))
+			.ForMember(
+				dest => dest.ProductType,
+				ops => ops.MapFrom(source => source.ProductType.Name))
+			.ForMember(
+				dest => dest.PictureUrl,
+				ops => ops.MapFrom<ProductUrlResolver>());
 	}
 }

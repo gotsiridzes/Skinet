@@ -2,49 +2,48 @@
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers
+namespace Api.Controllers;
+
+public class BuggyController : BaseApiController
 {
-	public class BuggyController : BaseApiController
+	private readonly StoreContext _context;
+
+	public BuggyController(StoreContext _context)
 	{
-		private readonly StoreContext _context;
+		this._context = _context;
+	}
 
-		public BuggyController(StoreContext _context)
+	[HttpGet("notfound")]
+	public IActionResult GetNotFoundRequest()
+	{
+		var thing = _context.Products.Find(100);
+		if (thing is null)
 		{
-			this._context = _context;
+			return NotFound(new ApiResponse(404));
 		}
 
-		[HttpGet("notfound")]
-		public IActionResult GetNotFoundRequest()
-		{
-			var thing = _context.Products.Find(100);
-			if (thing is null)
-			{
-				return NotFound(new ApiResponse(404));
-			}
+		return Ok();
+	}
 
-			return Ok();
-		}
+	[HttpGet("servererror")]
+	public IActionResult GetServerError()
+	{
+		var thing = _context.Products.Find(100);
+		var tts = thing.ToString();
 
-		[HttpGet("servererror")]
-		public IActionResult GetServerError()
-		{
-			var thing = _context.Products.Find(100);
-			var tts = thing.ToString();
+		return Ok();
+	}
 
-			return Ok();
-		}
+	[HttpGet("badrequest")]
+	public IActionResult GetBadRequest()
+	{
 
-		[HttpGet("badrequest")]
-		public IActionResult GetBadRequest()
-		{
+		return BadRequest(new ApiResponse(400));
+	}
 
-			return BadRequest(new ApiResponse(400));
-		}
-
-		[HttpGet("badrequest/{id}")]
-		public IActionResult GetBadRequest(int id)
-		{
-			return BadRequest();
-		}
+	[HttpGet("badrequest/{id}")]
+	public IActionResult GetBadRequest(int id)
+	{
+		return BadRequest();
 	}
 }
