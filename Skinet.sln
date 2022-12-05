@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{7859D18F-4A60-4E31-A266-7C0CAD1FC86D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{7859D18F-4A60-4E31-A266-7C0CAD1FC86D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{901891B6-E456-4CE1-AFB3-C94555878FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{901891B6-E456-4CE1-AFB3-C94555878FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{99C15901-3925-4DC4-B5E2-F689EA7C6391}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{99C15901-3925-4DC4-B5E2-F689EA7C6391}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{1AF225F5-D5B3-426D-B094-2C01ECA7A74B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7859D18F-4A60-4E31-A266-7C0CAD1FC86D} = {1AF225F5-D5B3-426D-B094-2C01ECA7A74B}
+		{901891B6-E456-4CE1-AFB3-C94555878FF8} = {1AF225F5-D5B3-426D-B094-2C01ECA7A74B}
+		{99C15901-3925-4DC4-B5E2-F689EA7C6391} = {1AF225F5-D5B3-426D-B094-2C01ECA7A74B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {757C37B4-2333-4DB2-841E-701E81D7018E}

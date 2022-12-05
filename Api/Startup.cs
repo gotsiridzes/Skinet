@@ -1,6 +1,5 @@
 using Api.Extensions;
 using Api.Middleware;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

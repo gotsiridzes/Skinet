@@ -1,7 +1,5 @@
 ﻿using Core.Entities;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Specifications;
 using Api.Dtos;

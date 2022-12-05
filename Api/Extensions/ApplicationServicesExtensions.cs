@@ -1,8 +1,6 @@
 ﻿using Api.Errors;
 using Api.Mappings;
 using Core.Interfaces;
-using Infrastructure.Data;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.Extensions;

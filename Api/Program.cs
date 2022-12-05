@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Infrastructure.Data;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api;
 
@@ -28,7 +27,7 @@ public class Program
 			}
 			catch (System.Exception ex)
 			{
-				logger.LogError(ex, "Error occured during migration");
+				logger.LogError(ex, "Error occurred during migration");
 			}
 			logger.LogInformation("Migrations applied successfully.");
 		}
